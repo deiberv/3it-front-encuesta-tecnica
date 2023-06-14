@@ -7,11 +7,11 @@
       <form [formGroup]="createForm" (ngSubmit)="register()">
         <div class="form-group mb-3">
           <label for="style" class="text-center">ESTILO MUSICAL</label>
-          <select class="form-control" id="style" formControlName="style">
+          <select class="form-control" id="style" formControlName="estilo">
             <option>Seleccione</option>
             <option *ngFor="let _style of styles; index as i" value="{{_style.id }}">{{ _style.name}}</option>
           </select>
-          <span class="error" *ngIf="createForm.controls['style'].touched && createForm.controls['style'].errors && createForm.controls['style'].errors['required']">
+          <span class="error" *ngIf="createForm.controls['estilo'].touched && createForm.controls['estilo'].errors && createForm.controls['estilo'].errors['required']">
             Debe Seleccionar el estilo musical
           </span>
         </div>

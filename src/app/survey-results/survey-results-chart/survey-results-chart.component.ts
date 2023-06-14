@@ -29,7 +29,7 @@ export class SurveyResultsChartComponent implements OnInit {
     //Se asignan los resultados para ser graficados
     this.results.forEach( survey => {
       this.single.push({
-        "name": survey.name,
+        "name": survey.nombreEstilo,
         "value": survey.total
       });
     });

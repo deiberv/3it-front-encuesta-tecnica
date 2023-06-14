@@ -19,9 +19,9 @@ export class SurveyComponent implements OnInit {
 
   @ViewChild('resultAlert', {static: false}) resultAlert: NgbAlert | undefined;
 
-  constructor(private service: SurveyService, private formBuilder: FormBuilder) { 
+  constructor(private service: SurveyService, private formBuilder: FormBuilder) {
     this.createForm = this.formBuilder.group({
-      style: ['', Validators.required],
+      estilo: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
   }
@@ -38,9 +38,6 @@ export class SurveyComponent implements OnInit {
   }
 
   getStyles(): void {
-    /*this.service.getStyles().subscribe( response => {
-      this.styles = response;
-    });*/
     this.service.getStyles().subscribe({
       next: response => { this.styles = response; },
       error: err => {
@@ -60,7 +57,8 @@ export class SurveyComponent implements OnInit {
         this._alert.next({"type":"success", "message": "Encuenta registrada de manera satisfactoria", "show": true});
         this.createForm.reset();
       },
-      error: err => {
+      error: (err) => {
+        console.log(err);
         this._alert.next({"type":"danger", "message": `Error registrando la encuenta: ${err.error.message}`, "show": true});
       }
     });

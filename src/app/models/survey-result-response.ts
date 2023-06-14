@@ -1,6 +1,6 @@
 export interface SurveyResultResponse
 {
-  "styleId":number,
-  "name": string,
+  "idEstilo":number,
+  "nombreEstilo": string,
   "total": number
 }

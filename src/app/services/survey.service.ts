@@ -14,14 +14,14 @@ export class SurveyService {
   constructor(private httpClient: HttpClient) { }
 
   getStyles():Observable<StyleResponse[]>{
-    return this.httpClient.get<StyleResponse[]>(environment.api+'/styles');
-  } 
+    return this.httpClient.get<StyleResponse[]>(environment.api+'/estilos');
+  }
 
   register(data: SurveyRequest): Observable<any>{
-    return this.httpClient.post(environment.api+'/create',data);
+    return this.httpClient.post(environment.api+'/encuestas',data);
   }
 
   getTotal(): Observable<SurveyResultResponse[]>{
-    return this.httpClient.get<SurveyResultResponse[]>(environment.api+'/results');
+    return this.httpClient.get<SurveyResultResponse[]>(environment.api+'/encuestas/resultado');
   }
 }
