@@ -1,0 +1,22 @@
+
+<div class="container-fluid page-survey-results">
+  <div class="abs-center">
+    <div class="survey-results container">
+      <div class="row" *ngIf="results && results.length > 0">
+        <div class="col col-md-6">
+          <app-survey-results-table [results]="results"></app-survey-results-table>
+        </div>
+        <div class="col col-md-6">
+          <app-survey-results-chart [results]="results"></app-survey-results-chart>
+        </div>
+        <a class="back" routerLink="/">Volver</a>
+      </div>
+      <div class="row" *ngIf="!results || results.length == 0">
+        <div class="col col-md-12 text-center">
+          <h3>No hay data en estos momentos</h3>
+          <a class="back" routerLink="/">Volver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

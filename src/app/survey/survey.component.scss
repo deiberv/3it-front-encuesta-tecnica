@@ -1,0 +1,16 @@
+.page-survey{
+  background-color: #5254bd;
+  color: #ffffff;
+  .form-container{
+    .error {
+      width: 100%;
+      margin-top: 0.25rem;
+      font-size: .875em;
+      color: #dc3545;
+    }
+  }
+  .back{
+    color: #ffffff;
+    font-size: 1rem;
+  }
+}

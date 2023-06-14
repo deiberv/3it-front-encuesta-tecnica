@@ -1,0 +1,35 @@
+
+<div class="container-fluid page-survey">
+  <div class="abs-center">
+    <div class="form-container container">
+      <ngb-alert #resultAlert class="mb-3" *ngIf="alert.show" [type]="alert.type">{{alert.message}}</ngb-alert>
+      <h1 class="text-center mb-3 mt-3">ENCUENTA</h1>
+      <form [formGroup]="createForm" (ngSubmit)="register()">
+        <div class="form-group mb-3">
+          <label for="style" class="text-center">ESTILO MUSICAL</label>
+          <select class="form-control" id="style" formControlName="style">
+            <option>Seleccione</option>
+            <option *ngFor="let _style of styles; index as i" value="{{_style.id }}">{{ _style.name}}</option>
+          </select>
+          <span class="error" *ngIf="createForm.controls['style'].touched && createForm.controls['style'].errors && createForm.controls['style'].errors['required']">
+            Debe Seleccionar el estilo musical
+          </span>
+        </div>
+        <div class="form-group mb-3">
+          <label for="email" class="text-center">CORREO ELECTRÓNICO</label>
+          <input type="email" class="form-control" id="email" formControlName="email" [email]="true">
+          <span class="error" *ngIf="createForm.controls['email'].touched && createForm.controls['email'].errors && createForm.controls['email'].errors['required']">
+            Debe ingresar el correo electrónico.
+          </span>
+          <span class="error" *ngIf="createForm.controls['email'].touched && createForm.controls['email'].errors && createForm.controls['email'].errors['email']">
+            Correo electronico invalido
+          </span>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="button" class="btn btn-primary btn-block"  (click)="register()" [disabled]="createForm.invalid">ENVIAR</button>
+          <a routerLink="/" class="btn-link back">Volver</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
