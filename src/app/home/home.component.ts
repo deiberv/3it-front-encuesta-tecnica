@@ -9,14 +9,9 @@ import { AboutComponent } from '../about/about.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-
-  acercaDe(){
-    this.modalService.open(AboutComponent);
   }
 
 }

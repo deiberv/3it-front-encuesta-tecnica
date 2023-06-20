@@ -22,6 +22,6 @@ export class SurveyService {
   }
 
   getTotal(): Observable<SurveyResultResponse[]>{
-    return this.httpClient.get<SurveyResultResponse[]>(environment.api+'/encuestas/resultado');
+    return this.httpClient.get<SurveyResultResponse[]>(environment.api+'/encuestas');
   }
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,6 +9,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [NgbModule],
       declarations: [ HomeComponent ]
     })
     .compileComponents();
@@ -19,7 +21,8 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Debe crear el componente', () => {
     expect(component).toBeTruthy();
   });
+
 });
