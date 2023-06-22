@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { AuthServerProvider } from "src/app/auth/auth-jwt.service";
 
@@ -11,7 +12,9 @@ export class Login {
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 
-  constructor(private authServerProvider: AuthServerProvider) {}
+  constructor(
+    private authServerProvider: AuthServerProvider
+  ) {}
 
   login(credentials: Login) : Observable<any> {
     return this.authServerProvider.login(credentials);
@@ -22,7 +25,6 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean {
-    console.log(this.authServerProvider.getToken());
     return this.authServerProvider.getToken() !== '';
   }
 

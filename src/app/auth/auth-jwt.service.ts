@@ -30,12 +30,9 @@ export class AuthServerProvider {
       .pipe(map(response => this.authenticateSuccess(response, false)));
   }
 
-  logout(): Observable<void> {
-    return new Observable(observer => {
-      this.localStorageService.clear('authenticationToken');
-      this.sessionStorageService.clear('authenticationToken');
-      observer.complete();
-    });
+  logout(): void {
+    this.localStorageService.clear('authenticationToken');
+    this.sessionStorageService.clear('authenticationToken');
   }
 
 
