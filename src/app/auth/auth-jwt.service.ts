@@ -27,7 +27,7 @@ export class AuthServerProvider {
   login(credentials: Login): Observable<void> {
     return this.http
       .post<any>(this.applicationConfigService.getEndpointFor('/auth/login'), credentials)
-      .pipe(map(response => this.authenticateSuccess(response, false)));
+      .pipe(map(response => this.authenticateSuccess(response, credentials.rememberMe)));
   }
 
   logout(): void {

@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { AuthServerProvider } from "src/app/auth/auth-jwt.service";
 
 
 export class Login {
-  constructor(public email: string, public password: string) {}
+  constructor(public email: string, public password: string, public rememberMe: boolean ) {}
 }
 
 

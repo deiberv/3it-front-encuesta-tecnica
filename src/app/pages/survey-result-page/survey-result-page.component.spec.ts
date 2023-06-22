@@ -5,7 +5,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SurveyService } from 'src/app/services/survey.service';
 import { SurveyResult } from 'src/app/models/survey-resul.model';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 const mockDataResultado: SurveyResult[] = [
   {
@@ -26,13 +28,19 @@ const mockDataResultado: SurveyResult[] = [
   {
     idEstilo: '5d2a1ece-f517-4b3d-b2d0-e86160cd2381',
     nombreEstilo: 'Pop',
-    total: 250
+    total: 75
+  },
+  {
+    idEstilo: '5d2a1ece-f517-4b3d-b2d0-e86160cd5281',
+    nombreEstilo: 'Jazz',
+    total: 75
   }
 ];
 
-const surveyServiceMock = {
-  getTotal: () => { return of(mockDataResultado) }
+const SwalMock = {
+  fire: () => { }
 }
+
 
 describe('SurveyResultPageComponent', () => {
   let component: SurveyResultPageComponent;
@@ -46,7 +54,8 @@ describe('SurveyResultPageComponent', () => {
       ],
       declarations: [ SurveyResultPageComponent ],
       providers: [
-        { provide: SurveyService, useValue: surveyServiceMock }
+        SurveyService,
+        { provide: Swal, useValue: SwalMock }
       ]
     })
     .compileComponents();
@@ -63,8 +72,33 @@ describe('SurveyResultPageComponent', () => {
   });
 
   it('Debe obtener el total del votos', () => {
+    const service = TestBed.inject(SurveyService);
+    const mockGetTotal = spyOn(service, 'getTotal').and.callFake(() => of(mockDataResultado));
     component.getTotal();
     expect(component.results).not.toBeNull();
     expect(component.results?.length).toBe(mockDataResultado.length);
   })
+
+  it('getTotal Debe mostrar mensaje  al producirse un error', () => {
+
+    const error$ = throwError(() => {
+      const error: HttpErrorResponse = new HttpErrorResponse({
+        error: {message: 'Debe tener el rol [ROLE_ADMIN]'},
+        status: 401
+      });
+      return error;
+    });
+
+    const service = TestBed.inject(SurveyService);
+    const mockGetTotal = spyOn(service, 'getTotal').and.callFake(() => error$);
+    const mockSwal = spyOn(Swal, 'fire');
+
+    component.getTotal();
+
+    expect(mockGetTotal).toHaveBeenCalled();
+    expect(mockSwal).toHaveBeenCalled();
+    expect(component.results).toBeFalsy();
+
+  })
+
 });

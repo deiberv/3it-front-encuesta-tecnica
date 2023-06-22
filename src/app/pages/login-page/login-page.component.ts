@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Login, LoginService } from './login.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-page',
@@ -31,22 +32,28 @@ export class LoginPageComponent implements OnInit {
 
   login(): void {
     this.loginForm.markAllAsTouched();
-    if (this.loginForm.invalid) {
-      return;
+    if (this.loginForm.valid) {
+      this.loginService.login({
+        email: this.loginForm.get('username')!.value,
+        password: this.loginForm.get('password')!.value,
+        rememberMe: false
+      }).subscribe({
+        next: () => {
+          if (!this.router.getCurrentNavigation()) {
+            // There were no routing during login (eg from navigationToStoredUrl)
+            this.router.navigate(['']);
+          }
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            text: `Error realizando login`,
+            toast: true,
+            position: 'top-right',
+            timer: 2000
+          });
+        },
+      });
     }
-    this.loginService.login({
-      email: this.loginForm.get('username')!.value,
-      password: this.loginForm.get('password')!.value
-    }).subscribe({
-      next: () => {
-        if (!this.router.getCurrentNavigation()) {
-          // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['']);
-        }
-      },
-      error: (error) => {
-        //Todo Mostrar mensaje de error
-      },
-    });
   }
 }

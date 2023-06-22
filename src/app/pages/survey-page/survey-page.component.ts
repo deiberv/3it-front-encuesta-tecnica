@@ -44,35 +44,32 @@ export class SurveyPageComponent implements OnInit {
 
   register(): void {
     this.createForm.markAllAsTouched();
-    if (this.createForm.invalid) {
-      return;
+    if (this.createForm.valid) {
+      this.surveyService.register({
+        email: this.createForm.get('email')!.value,
+        estilo: this.createForm.get('estilo')!.value
+      }).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            text: `Encuenta registrada de manera satisfactoria`,
+            toast: true,
+            position: 'top-right',
+            timer: 2000
+          });
+          this.createForm.reset();
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            text: `Error registrando la encuenta: ${err.error.message}`,
+            toast: true,
+            position: 'top-right',
+            timer: 2000
+          });
+        },
+      });
     }
-
-    this.surveyService.register({
-      email: this.createForm.get('email')!.value,
-      estilo: this.createForm.get('estilo')!.value
-    }).subscribe({
-      next: (response) => {
-        Swal.fire({
-          icon: 'success',
-          text: `Encuenta registrada de manera satisfactoria`,
-          toast: true,
-          position: 'top-right',
-          timer: 2000
-        });
-        this.createForm.reset();
-      },
-      error: (err) => {
-        console.log(err);
-        Swal.fire({
-          icon: 'error',
-          text: `Error registrando la encuenta: ${err.error.message}`,
-          toast: true,
-          position: 'top-right',
-          timer: 2000
-        });
-      },
-    });
   }
 
 }
