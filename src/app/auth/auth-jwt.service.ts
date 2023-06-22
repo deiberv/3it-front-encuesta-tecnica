@@ -26,7 +26,10 @@ export class AuthServerProvider {
 
   login(credentials: Login): Observable<void> {
     return this.http
-      .post<any>(this.applicationConfigService.getEndpointFor('/auth/login'), credentials)
+      .post<any>(this.applicationConfigService.getEndpointFor('/auth/login'), {
+        email: credentials.email,
+        password: credentials.password
+      })
       .pipe(map(response => this.authenticateSuccess(response, credentials.rememberMe)));
   }
 
@@ -34,7 +37,6 @@ export class AuthServerProvider {
     this.localStorageService.clear('authenticationToken');
     this.sessionStorageService.clear('authenticationToken');
   }
-
 
   private authenticateSuccess(response: any, rememberMe: boolean): void {
     const jwt = response.token;

@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Backend
+Este proyecto esta apuntando para el backend git git@github.com:deiberv/3it-nest-backend-encuesta.git
+
+Se debe poner en marcha este backend siguiendo las instruccione de readme del mismo (esta apuntando al puerto 3000)
+Se debe crear un usuario con ROLE_ADMIN desde ppostman para cargar la data
+Usario disponibles
+test1@google.com - Abc123 - ROLE_ADMIN
+test2@google.com - Abc123 - ROLE_USER
