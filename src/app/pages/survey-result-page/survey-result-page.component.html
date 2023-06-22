@@ -1,0 +1,21 @@
+<div class="page-survey-results">
+  <div class="abs-center d-flex">
+    <div class="container">
+      <div class="row" *ngIf="!results || results.length == 0">
+        <div class="col-12">
+          <ngb-alert type="info" >No se ha registrado datos en la encuesta</ngb-alert>
+        </div>
+      </div>
+      <div class="row" *ngIf="results && results.length > 0">
+        <div class="col-12">
+          <app-survey-results-table [results]="results"></app-survey-results-table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a class="back fw-bold" routerLink="/">Volver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

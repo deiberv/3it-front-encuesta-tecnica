@@ -1,0 +1,53 @@
+<div class="page-about">
+  <div class="abs-center d-flex">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-7 col-lg-5">
+          <form  (ngSubmit)="login()" (keyup.enter)="login()" [formGroup]="loginForm">
+            <div class="card">
+              <div class="card-header">Login</div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="username-label" for="username">Login</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        id="username"
+                        placeholder="email@google.com"
+                        formControlName="username"
+                        data-cy="username"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        id="password"
+                        placeholder="Tu password"
+                        formControlName="password"
+                        data-cy="password"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary mt-3">INGRESAR</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
